@@ -8,7 +8,7 @@ org 0x7c00
 %define SY 0
 
 %define BG 0x08
-%define FG 0x0e ; 6
+%define FG 0x0e
 
 ; set the graphical video mode
 init_video_mode:
