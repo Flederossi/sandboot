@@ -70,7 +70,7 @@ Now you can use programs like [balenaEtcher](https://etcher.balena.io/) to flash
 ---
 <br />
 
-*Note:*
+> *Note:*
 > If you just want to compile sandboot you can use:
 > ```
 > make
