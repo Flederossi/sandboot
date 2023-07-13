@@ -1,5 +1,5 @@
 # sandboot
-A tiny sand simulation inside a x86 bootloader.
+A tiny sand simulation inside a x86 bootloader written in assembly.
 
 <br />
 
