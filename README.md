@@ -70,10 +70,10 @@ Now you can use programs like [balenaEtcher](https://etcher.balena.io/) to flash
 ---
 <br />
 
-If you just want to compile sandboot you can use:
-```
-make
-```
+> If you just want to compile sandboot you can use:
+> ```
+> make
+> ```
 The binary file is generated in bin/boot.bin
 
 <br />
