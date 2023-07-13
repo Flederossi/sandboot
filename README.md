@@ -5,14 +5,18 @@ A tiny sand simulation inside a x86 bootloader.
 
 *Note: This bootloader was written to learn more about how bootloaders work. It does not perform any special task other than the simple simulation of sand particles.*
 
-## Concpet
+<br />
+
+## Concept
 It uses the pretty simple concept of checking the spaces under a sand particle and moving it to one of the blank spaces. The space directly under the particle is checked first, then the the space down left and at the end the space down right.
 
+<br />
 
 ## Compile and Run
 There are three different ways to use sandboot:
 
----
+<br />
+
 ### 1. Use qemu to run sandboot inside your OS
 Dependencies: nasm, qemu
 > Compile sandboot and run the binary using qemu
@@ -21,7 +25,8 @@ make run
 ```
 This should open a window booting sandboot.
 
----
+<br />
+
 ### 2. Run it on real hardware by flashing it directly to a usb
 Dependencies: nasm
 
@@ -36,7 +41,8 @@ make flash USB=[label]
 ```
 Now you can reboot your PC and boot from the usb drive.
 
----
+<br />
+
 ### 3. Generate and boot from an iso image
 Dependencies: nasm, genisoimage
 > Compile sandboot and generate the iso image
