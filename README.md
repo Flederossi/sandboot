@@ -21,7 +21,7 @@ Before compiling you need to create the folder bin/ inside the root of the proje
 ```
 mkdir bin
 ```
-After that there are three different ways to use sandboot:
+After that there are two different ways to use sandboot:
 
 <br />
 
@@ -53,19 +53,6 @@ fdisk -l
 make flash USB=[label]
 ```
 Now you can reboot your PC and boot from the usb drive.
-
----
-<br />
-
----
-
-### 3.) Generate and boot from an iso image
-Dependencies: nasm, genisoimage
-> Compile sandboot and generate the iso image
-```
-make iso
-```
-Now you can use programs like [balenaEtcher](https://etcher.balena.io/) to flash the generated iso image in the root of the project onto an usb drive and boot from it.
 
 ---
 <br />
