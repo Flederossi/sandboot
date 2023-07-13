@@ -5,13 +5,13 @@ org 0x7c00
 %define BG 0x08				; Color used as background for simulation canvas
 %define FG 0x0e				; Color used for the sand particles
 
-%define X1 140				; X-coordinate for the top left point of the simulation canvas 110
-%define Y1 80				; Y-coordinate for the top left point of the simulation canvas 50
-%define X2 180				; X-coordinate for the bottom right point of the simulation canvas 210
-%define Y2 120				; Y-coordinate for the bottom right point of the simulation canvas 150
+%define X1 110				; X-coordinate for the top left point of the simulation canvas
+%define Y1 50				; Y-coordinate for the top left point of the simulation canvas
+%define X2 210				; X-coordinate for the bottom right point of the simulation canvas
+%define Y2 150				; Y-coordinate for the bottom right point of the simulation canvas
 
-%define SX 160				; X-coordinate for the spawn point of the sand particles 160
-%define SY 80				; Y-coordinate for the spawn point of the sand particles 50
+%define SX 160				; X-coordinate for the spawn point of the sand particles
+%define SY 50				; Y-coordinate for the spawn point of the sand particles
 
 
 init_video_mode:
