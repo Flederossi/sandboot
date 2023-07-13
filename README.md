@@ -20,6 +20,7 @@ It uses the pretty simple concept of checking the spaces under a sand particle a
 There are three different ways to use sandboot:
 
 <br />
+
 ---
 
 ### 1. Use qemu to run sandboot inside your OS
