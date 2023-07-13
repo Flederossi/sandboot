@@ -62,3 +62,5 @@ Dependencies: nasm, genisoimage
 make iso
 ```
 Now you can use programs like ![balenaEtcher](https://etcher.balena.io/) to flash the generated iso image in the root of the project onto an usb drive and boot from it.
+
+---
