@@ -12,8 +12,8 @@ It uses the pretty simple concept of checking the spaces under a sand particle a
 ## Compile and Run
 There are three different ways to use sandboot:
 
-
-### 1. Use qemu to run sandboot on top of your OS
+---
+### 1. Use qemu to run sandboot inside your OS
 Dependencies: nasm, qemu
 > Compile sandboot and run the binary using qemu
 ```
@@ -21,7 +21,7 @@ make run
 ```
 This should open a window booting sandboot.
 
-
+---
 ### 2. Run it on real hardware by flashing it directly to a usb
 Dependencies: nasm
 *Note: Use this method if you really know what you are doing. This method can result in data loss if used incorrectly!*
@@ -35,7 +35,7 @@ make flash USB=[label]
 ```
 Now you can reboot your PC and boot from the usb drive.
 
-
+---
 ### 3. Generate and boot from an iso image
 Dependencies: nasm, genisoimage
 > Compile sandboot and generate the iso image
