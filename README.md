@@ -17,13 +17,17 @@ It uses the pretty simple concept of checking the spaces under a sand particle a
 <br />
 
 ## Compile and Run
-There are three different ways to use sandboot:
+Before compiling you need to create the folder bin/ inside the root of the project.
+```
+mkdir bin
+```
+After that there are three different ways to use sandboot:
 
 <br />
 
 ---
 
-### 1. Use qemu to run sandboot inside your OS
+### 1.) Use qemu to run sandboot inside your OS
 Dependencies: nasm, qemu
 > Compile sandboot and run the binary using qemu
 ```
@@ -36,7 +40,7 @@ This should open a window booting sandboot.
 
 ---
 
-### 2. Run it on real hardware by flashing it directly to a usb
+### 2.) Run it on real hardware by flashing it directly to a usb
 Dependencies: nasm
 
 *Note: Use this method if you really know what you are doing. This method can result in data loss if used incorrectly!*
@@ -55,7 +59,7 @@ Now you can reboot your PC and boot from the usb drive.
 
 ---
 
-### 3. Generate and boot from an iso image
+### 3.) Generate and boot from an iso image
 Dependencies: nasm, genisoimage
 > Compile sandboot and generate the iso image
 ```
@@ -64,3 +68,14 @@ make iso
 Now you can use programs like [balenaEtcher](https://etcher.balena.io/) to flash the generated iso image in the root of the project onto an usb drive and boot from it.
 
 ---
+<br />
+
+If you just want to compile sandboot you can use:
+```
+make
+```
+The binary file is generated in bin/boot.bin
+
+<br />
+## Configuration
+There are some constants in [boot.asm](https://github.com/Flederossi/sandboot/blob/main/src/boot.asm) you can configure. After changing these a recompile is required.
