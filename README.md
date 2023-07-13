@@ -24,6 +24,7 @@ This should open a window booting sandboot.
 ---
 ### 2. Run it on real hardware by flashing it directly to a usb
 Dependencies: nasm
+
 *Note: Use this method if you really know what you are doing. This method can result in data loss if used incorrectly!*
 > Get the label of the usb (something like sda, sdb, sdc, ...)
 ```
