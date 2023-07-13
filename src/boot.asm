@@ -1,139 +1,134 @@
 bits 16
 org 0x7c00
 
-%define W 159
-%define H 99
 
-%define SX 80
-%define SY 0
+%define BG 0x08				; Color used as background for simulation canvas
+%define FG 0x0e				; Color used for the sand particles
 
-%define BG 0x08
-%define FG 0x0e
+%define X1 140				; X-coordinate for the top left point of the simulation canvas 110
+%define Y1 80				; Y-coordinate for the top left point of the simulation canvas 50
+%define X2 180				; X-coordinate for the bottom right point of the simulation canvas 210
+%define Y2 120				; Y-coordinate for the bottom right point of the simulation canvas 150
 
-; set the graphical video mode
+%define SX 160				; X-coordinate for the spawn point of the sand particles 160
+%define SY 80				; Y-coordinate for the spawn point of the sand particles 50
+
+
 init_video_mode:
-	mov ah, 0x00
-	mov al, 0x13 ; 320x200
+	mov ah, 0x00			; set video mode
+	mov al, 0x13			; graphical video mode 13h : 320x200
 	int 0x10
-	mov bh, 0x00
+	mov bh, 0x00			; draw on page 0
 
-; initialize the drawing of the background
 init_draw_bg:
-	mov ah, 0x0c
-	mov al, BG
-	mov cx, W
-	mov dx, H
+	mov ah, 0x0c			; pixel drawing mode
+	mov al, BG				; set color to background color
+	mov cx, X2				; set pixel ptr to bottom right corner
+	mov dx, Y2
 	int 0x10
+	mov si, 0x01			; setup reg to check if any sand has moved
 
-; shift the pixel pointer to draw bg on column to the right
 draw_bg_new_column:
-	dec cx
-	cmp cx, -1
-	je draw_bg_new_row
-	int 0x10
+	dec cx					; move pixel ptr to the next pixel
+	cmp cx, X1				; check if pixel ptr hits border -> go to next row
+	jl draw_bg_new_row
+	int 0x10				; draw bg pixel
 	jmp draw_bg_new_column
 
-; shift the pixel pointer to draw bg on row down
 draw_bg_new_row:
-	mov cx, W
-	dec dx
-	cmp dx, -1
-	je add_new_particle
-	int 0x10
+	mov cx, X2				; reset the column of the pixel ptr
+	dec dx					; move pixel ptr to the next row
+	cmp dx, Y1				; check if whole simulation canvas is drawn (last line) -> go to simulation
+	jl add_new_particle
+	int 0x10				; draw bg pixel
 	jmp draw_bg_new_column
 
-; add a new sand particle at the top center of the screen
 add_new_particle:
-	mov ah, 0x0c
+	cmp si, 0x00			; check if any sand particle moved (0x00 no particle moved, 0x01 at least one particle)
+	je init_draw_bg			; reset everything if no particle moved (no more particles can be spawned)
+	mov si, 0x00			; reset the reg
+	mov ah, 0x0c			; pixel drawing mode
 	mov al, FG
 	mov cx, SX
 	mov dx, SY
-	int 0x10
+	int 0x10				; draw new sand particle at spawn coordinates
 
-; reset the pixel pointer to check every pixel to the down right
 reset_check_ptr:
-	mov cx, W
-	mov dx, H
+	mov cx, X2				; reset to pixel ptr to the bottom right edge
+	mov dx, Y2
 
-; checks if pixel ptr is at sand particle
 check_pixel:
-	mov ah, 0x0d
+	mov ah, 0x0d			; mode to get color of specific pixel
 	int 0x10
-	cmp al, FG
-	je update_particle
+	cmp al, FG				; check if curr pixel of the pixel ptr is sand particle
+	je update_particle		; update if pixel is sand particle
 
-; shift the pixel ptr one column to the left
 check_new_column:
-	dec cx
-	cmp cx, -1
-	je check_new_row
+	dec cx					; move the pixel ptr to check every pixel one pixel to the left
+	cmp cx, X1				; check if pixel ptr hits border
+	jl check_new_row		; jump to next row
 	jmp check_pixel
 
-; shift the pixel ptr one row up
 check_new_row:
-	mov cx, W
-	dec dx
-	cmp dx, -1
-	je add_new_particle
+	mov cx, X2				; reset the column of the pixel ptr
+	dec dx					; move the pixel ptr one row up
+	cmp dx, Y1				; check if pixel ptr is at top left corner
+	jl add_new_particle		; spawn new particle and start check again from bottom right corner
 	jmp check_pixel
 
-; procedure to draw the new sand particle pixel
 draw_new_particle_pos:
-	mov ah, 0x0c
+	mov ah, 0x0c			; pixel drawing mode
 	mov al, FG
-	int 0x10
+	int 0x10				; draw the updated sand particle
+	mov si, 0x01			; set the reg to check if any sand particle moved to 0x01 (true)
 	ret
 
-; move the particle down
 move_down:
 	call draw_new_particle_pos
 	dec dx
 	jmp check_new_column
 
-; move the particle down left
 move_left:
 	call draw_new_particle_pos
 	inc cx
 	dec dx
 	jmp check_new_column
 
-; move the particle down right
 move_right:
 	call draw_new_particle_pos
 	dec cx
 	dec dx
 	jmp check_new_column
 
-; check where current particle can move to
 update_particle:
-	mov ah, 0x0c
+	mov ah, 0x0c			; pixel drawing mode
 	mov al, BG
-	int 0x10
+	int 0x10				; set the sand particle pixel to blank
 
-	mov ah, 0x0d
+	mov ah, 0x0d			; pixel check mode
 
-	inc dx
-	int 0x10
-	cmp al, BG
-	je move_down
-
-	dec cx
+	inc dx					; check pixel down
 	int 0x10
 	cmp al, BG
-	je move_left
+	je move_down			; move the sand particle on down if pixel is blank
 
+	dec cx					; check pixel down left
+	int 0x10
+	cmp al, BG
+	je move_left			; move the sand particle down to the left if pixel is blank
+
+	inc cx					; check pixel down right
 	inc cx
-	inc cx
 	int 0x10
 	cmp al, BG
-	je move_right
+	je move_right			; move the sand particle down to the right if pixel is blank
 
 	dec cx
 	dec dx
-	mov ah, 0x0c
+	mov ah, 0x0c			; pixel drawing mode
 	mov al, FG
-	int 0x10
+	int 0x10				; set the blank sand particle pixel back to a normal sand particle if no move available
 	jmp check_new_column
 
 times 510 - ($-$$) db 0
-dw 0xaa55
+dw 0xaa55					; magical number
