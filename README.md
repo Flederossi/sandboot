@@ -77,5 +77,6 @@ make
 The binary file is generated in bin/boot.bin
 
 <br />
+
 ## Configuration
 There are some constants in [boot.asm](https://github.com/Flederossi/sandboot/blob/main/src/boot.asm) you can configure. After changing these a recompile is required.
