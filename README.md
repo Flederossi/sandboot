@@ -46,7 +46,7 @@ Dependencies: nasm
 *Note: Use this method if you really know what you are doing. This method can result in data loss if used incorrectly!*
 > Get the label of the usb (something like sda, sdb, sdc, ...)
 ```
-fdisk -l
+sudo fdisk -l
 ```
 > *Info: If you are under MacOS you can find the label in your DiskUtility (something like disk1, disk2, ...)*
 > Compile and flash sandboot to the usb (replace [label] with the label of your usb, without the square brackets)
