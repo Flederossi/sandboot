@@ -34,6 +34,8 @@ This should open a window booting sandboot.
 ---
 <br />
 
+---
+
 ### 2. Run it on real hardware by flashing it directly to a usb
 Dependencies: nasm
 
@@ -48,7 +50,10 @@ make flash USB=[label]
 ```
 Now you can reboot your PC and boot from the usb drive.
 
+---
 <br />
+
+---
 
 ### 3. Generate and boot from an iso image
 Dependencies: nasm, genisoimage
