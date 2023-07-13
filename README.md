@@ -1,7 +1,11 @@
 # sandboot
 A tiny sand simulation inside a x86 bootloader.
 
+<br />
+
 ![Alt Text](https://github.com/Flederossi/sandboot/blob/main/assets/screen-capture.gif)
+
+<br />
 
 *Note: This bootloader was written to learn more about how bootloaders work. It does not perform any special task other than the simple simulation of sand particles.*
 
@@ -16,7 +20,7 @@ It uses the pretty simple concept of checking the spaces under a sand particle a
 There are three different ways to use sandboot:
 
 <br />
-
+---
 ### 1. Use qemu to run sandboot inside your OS
 Dependencies: nasm, qemu
 > Compile sandboot and run the binary using qemu
@@ -24,7 +28,7 @@ Dependencies: nasm, qemu
 make run
 ```
 This should open a window booting sandboot.
-
+---
 <br />
 
 ### 2. Run it on real hardware by flashing it directly to a usb
