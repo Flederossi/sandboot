@@ -48,6 +48,7 @@ Dependencies: nasm
 ```
 fdisk -l
 ```
+> *Info: If you are under MacOS you can find the label in your DiskUtility (something like disk1, disk2, ...)*
 > Compile and flash sandboot to the usb (replace [label] with the label of your usb, without the square brackets)
 ```
 make flash USB=[label]
