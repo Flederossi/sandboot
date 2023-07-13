@@ -21,6 +21,7 @@ There are three different ways to use sandboot:
 
 <br />
 ---
+
 ### 1. Use qemu to run sandboot inside your OS
 Dependencies: nasm, qemu
 > Compile sandboot and run the binary using qemu
@@ -28,6 +29,7 @@ Dependencies: nasm, qemu
 make run
 ```
 This should open a window booting sandboot.
+
 ---
 <br />
 
