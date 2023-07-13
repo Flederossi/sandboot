@@ -146,7 +146,7 @@ update_particle:
 	int 0x10			; set the blank sand particle pixel back to a normal sand particle if no move available
 	jmp check_new_column
 
-msg db 13, 10, "< Sandboot 1.0 >", 13, 10, 10, "Start simulation? [Return]", 0
+msg db 13, 10, " < Sandboot 1.0 >", 13, 10, 10, " Start simulation? [Return]", 0
 
 times 510 - ($-$$) db 0
 dw 0xaa55				; magical number
