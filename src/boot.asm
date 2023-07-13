@@ -24,11 +24,11 @@ print_info_message:
 		mov al, [si]		; load next char
 		cmp al, 0		; check if end of string
 		jne print_loop
-	input_loop:
-		xor ax, ax
-		int 0x16		; check for user input
-		cmp al, 0x0d		; check if return key is pressed
-		jne input_loop
+	xor ax, ax
+	sleep_loop:
+		int 0x16		; wait for user input
+		cmp al, 0x0d		; check if input is return key
+		jne sleep_loop
 
 init_video_mode:
 	mov ah, 0x00			; set video mode
@@ -146,7 +146,7 @@ update_particle:
 	int 0x10			; set the blank sand particle pixel back to a normal sand particle if no move available
 	jmp check_new_column
 
-msg db 13, 10, "Loaded Sandboot 1.0...", 13, 10, "[Return] to start simulation...", 0
+msg db 13, 10, "< Sandboot 1.0 >", 13, 10, 10, "Start simulation? [Return]", 0
 
 times 510 - ($-$$) db 0
 dw 0xaa55				; magical number
