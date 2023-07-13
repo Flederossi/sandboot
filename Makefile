@@ -8,4 +8,4 @@ flash: sandboot
 	sudo dd if=bin/boot.bin of=/dev/$(USB) bs=512
 
 iso: sandboot
-	genisoimage -quiet -V sandboot -input-charset iso8859-1 -o sandboot.iso -b bin/boot.bin
+	mkisofs -o sandboot.iso -b boot.bin -no-emul-boot -boot-load-size 4 -boot-info-table bin/
